@@ -1,0 +1,92 @@
+# RabbitMQ
+
+# Running it on localhost:15672
+-> go to C:\Program Files\RabbitMQ Server\rabbitmq_server-3.9.11\sbin
+-> ls to see all .bat scripts files
+-> rabbitmq-plugins.bat enable rabbitmq_management
+-> you can enable/disable it
+-> go to localhost:15672 
+-> username: guest and password: guest
+
+# What is message and why we need it ?
+-> SOAP protocol has message, header and body
+-> asynchronous, different for a synchronous http request
+-> example:
+-> customers messages, orders comming in a huge load
+-> we can process them one by one
+-> we use advanced messaging to encapsulate any kind of information
+-> queues, topics, channels, exchanges, depends on the protocol definition
+
+# Messaging Protocols
+-> most used are STOMP, MQTT and MQP
+-> STOMP is a text-oriented messaging protocols (simple messages)
+-> MQTT macchine to machine
+-> AMQP is advanced messaging protocols protocol
+
+# What AMQP solves ?
+-> completely different systems to exchange messages
+-> vendor A publishes the message to broker and vendor B receives the message from broker  
+-> diverse programming languages can communicate easily
+-> enables messaging as a cloud service
+
+# RabbitMQ features
+-> supports clustering for fault tolerance and scalability
+-> multiple connections in a single TCP connection
+-> delegate less process
+
+# Actors of Messaging
+-> producer produces a message eich is sent to a exchange
+-> through the exchange the message is routed to a queue
+-> a consumer recieves the messages from the queue
+
+# Exchanges
+-> first to receive the message
+-> routes a message to one or more queue
+-> routing algorithms dependes on exchange types and "bidings"
+-> "biding" is nothing more than a configuration to bind exchanges to queues
+-> types:
+->
+-> direct = empty string and amq.direct
+-> fanout = amq.fanout
+-> topic = amq.topic (user purchased, for example)
+-> headers = amq.match and amq.headers
+
+# Queues
+-> messages arrive from exchanges to queues
+-> where messages go after reaching a subscriber
+-> properties:
+-> 
+-> name: name of the queue
+-> durable: either to persist to disk or not
+-> exclusive: delete the queue if not used anymore
+-> auto-delete: delete the queue when consumer unsubscribes
+
+# Topics
+-> the "subject" of a message
+-> they are routing_key to the messages
+-> special format "app.logs.error" (application logging error)
+-> optional parameters for message exchange
+-> you can send and receive messages without topics
+-> with no topic it goes to default exchanges and queue
+-> topics exchanges are defined with topic messages
+
+# Bidings
+-> rules that exchanges use to route messages to queues --important--
+-> from exchange E to queue K, K has to be bound to E
+-> may have an optional routing key attribute used by some exchange types
+-> routing_key acts like a filter
+-> queue is a destination city
+-> exchanges are like the airport of this city
+-> bidings are the routes to arrive from the airport to the city
+-> there can be zero or many routes possible to reach it
+
+# What if the message can't be routed to the queue ?
+-> imagine there are no bidings for the exchange the message was published to
+-> the message is either dropped or returned to the publisher
+-> it depends on the message attributes the publisher has set
+-> publisher attributes are very useful
+
+# Main difference between RabbitMQ and Kafka
+-> kafka has descentralized broker 
+-> brokerless, distributed or cloud based
+
