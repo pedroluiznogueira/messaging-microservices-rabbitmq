@@ -4,7 +4,7 @@ This mono repo contains two microservices projects wich I used to implement Asyn
 ### Running the project on your machine
 
 - clone <a href="https://github.com/pedroluiznogueira/microservices-messaging-producer">producer microservice</a>
-- clone <a href="https://github.com/pedroluiznogueira/microservices-messaging-consumer">producer microservice</a>
+- clone <a href="https://github.com/pedroluiznogueira/microservices-messaging-consumer">consumer microservice</a>
 - both projects contain a docker-compose.yml
 - use any of them to run the rabbitmq container
 - under the root directory of the project you chose run
